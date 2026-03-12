@@ -25,7 +25,7 @@ set(DEPLOY_REMOTE_DIR "/home/mevepe/app" CACHE STRING "Remote directory to copy 
 add_custom_command(TARGET TrymeLinux POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E echo "Deploying to Remote..."
   COMMAND ssh -i ${DEPLOY_REMOTE_KEY} ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST} "mkdir -p ${DEPLOY_REMOTE_DIR}"
-  COMMAND rsync -avz -e "ssh -i ${DEPLOY_REMOTE_KEY}" --progress $<TARGET_FILE:TrymeLinux> ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST}:${DEPLOY_REMOTE_DIR}
+  COMMAND rsync -avz -e "ssh -i ${DEPLOY_REMOTE_KEY}" $<TARGET_FILE:TrymeLinux> ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST}:${DEPLOY_REMOTE_DIR}
   COMMAND ssh -i ${DEPLOY_REMOTE_KEY} ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST} "chmod +x ${DEPLOY_REMOTE_DIR}/$<TARGET_FILE_NAME:TrymeLinux>"
   COMMAND ${CMAKE_COMMAND} -E echo "Deploying done"
 )
