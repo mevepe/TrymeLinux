@@ -1,5 +1,0 @@
-/mnt/c/Users/mevep/source/repos/TrymeLinux/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/mevep/source/repos/TrymeLinux/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/mevep/source/repos/TrymeLinux/build/TrymeLinux/CMakeFiles/TrymeLinux.dir
-/mnt/c/Users/mevep/source/repos/TrymeLinux/build/TrymeLinux/CMakeFiles/edit_cache.dir
-/mnt/c/Users/mevep/source/repos/TrymeLinux/build/TrymeLinux/CMakeFiles/rebuild_cache.dir

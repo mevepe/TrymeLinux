@@ -14,3 +14,18 @@ set_target_properties(TrymeLinux PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(TrymeLinux PRIVATE stdc++)
 
 # TODO: Add tests and install targets if needed.
+
+# Deploy settings (can be overridden in CMake GUI / presets)
+set(DEPLOY_PRESET "arm64-wsl" CACHE STRING "CMake preset to build before deploy")
+set(DEPLOY_REMOTE_USER "mevepe" CACHE STRING "Remote SSH user for deploy")
+set(DEPLOY_REMOTE_KEY "~/.ssh/wsl-remote-debug" CACHE STRING "Path to private key for SSH")
+set(DEPLOY_REMOTE_HOST "192.168.0.100" CACHE STRING "Remote host for deploy")
+set(DEPLOY_REMOTE_DIR "/home/mevepe/app" CACHE STRING "Remote directory to copy files to")
+
+add_custom_command(TARGET TrymeLinux POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E echo "Deploying to Remote..."
+  COMMAND ssh -i ${DEPLOY_REMOTE_KEY} ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST} "mkdir -p ${DEPLOY_REMOTE_DIR}"
+  COMMAND rsync -avz -e "ssh -i ${DEPLOY_REMOTE_KEY}" --progress $<TARGET_FILE:TrymeLinux> ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST}:${DEPLOY_REMOTE_DIR}
+  COMMAND ssh -i ${DEPLOY_REMOTE_KEY} ${DEPLOY_REMOTE_USER}@${DEPLOY_REMOTE_HOST} "chmod +x ${DEPLOY_REMOTE_DIR}/$<TARGET_FILE_NAME:TrymeLinux>"
+  COMMAND ${CMAKE_COMMAND} -E echo "Deploying done"
+)
