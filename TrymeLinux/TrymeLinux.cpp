@@ -8,7 +8,7 @@ int main()
 	std::cout << "Hello CMake.\n";
 
 	const char* chipname = "/dev/gpiochip0";
-	int line_num = 15; // PA15
+	int line_num = 25; // GPIO0_D1
 
 	try {
 		gpiod::chip chip(chipname);

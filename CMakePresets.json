@@ -54,9 +54,16 @@
                 "rhs": "Linux"
             },
             "vendor": {
-                "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
-                    "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
-                }
+              "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+                "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
+                "remoteMachineName": "WSL",
+                "intelliSenseMode": "linux-gcc-x64",
+                "includePath": [
+                  "/usr/include",
+                  "/usr/local/include",
+                  "/home/me/armbian-rootfs/usr/include"
+                ]
+              }
             }
         },
         {
