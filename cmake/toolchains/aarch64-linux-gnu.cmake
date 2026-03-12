@@ -3,9 +3,10 @@ set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 # Adjust the path to your installed cross compilers in WSL (example for Ubuntu)
-set(CROSS_ROOT /usr/bin)
-set(CMAKE_C_COMPILER ${CROSS_ROOT}/aarch64-linux-gnu-gcc)
-set(CMAKE_CXX_COMPILER ${CROSS_ROOT}/aarch64-linux-gnu-gcc)
+# Common installation places compilers under /usr/bin, so set CROSS_ROOT to /usr
+set(CROSS_ROOT /usr)
+set(CMAKE_C_COMPILER ${CROSS_ROOT}/bin/aarch64-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER ${CROSS_ROOT}/bin/aarch64-linux-gnu-g++)
 set(CMAKE_FIND_ROOT_PATH ${CROSS_ROOT})
 
 # Search for programs in the build host directories
