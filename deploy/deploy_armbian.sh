@@ -29,15 +29,12 @@ ssh -i ${REMOTE_PRIVATE_KEY} ${REMOTE_USER}@${REMOTE_HOST} "mkdir -p ${REMOTE_DI
 rsync -avz -e "ssh -i ${REMOTE_PRIVATE_KEY}" --progress "${BIN_PATH}" ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/
 ssh -i ${REMOTE_PRIVATE_KEY} ${REMOTE_USER}@${REMOTE_HOST} "chmod +x ${REMOTE_DIR}/TrymeLinux"
 
-# Optional: run under gdbserver for remote debugging
-read -p "Start remote under gdbserver? (y/N) " yn
-if [[ "${yn}" =~ ^[Yy]$ ]]; then
-  # start gdbserver on remote on port 2345
-  ssh -i ${REMOTE_PRIVATE_KEY} -f ${REMOTE_USER}@${REMOTE_HOST} "cd ${REMOTE_DIR} && nohup gdbserver :2345 ./TrymeLinux > gdbserver.log 2>&1 &"
-  echo "gdbserver started on ${REMOTE_HOST}:2345"
-  echo "To connect from WSL:"
-  echo "  gdb ${BIN_PATH}"
-  echo "  (gdb) target remote ${REMOTE_HOST}:2345"
-fi
+# Run under gdbserver for remote debugging
+# start gdbserver on remote on port 2345
+ssh -i ${REMOTE_PRIVATE_KEY} -f ${REMOTE_USER}@${REMOTE_HOST} "cd ${REMOTE_DIR} && nohup gdbserver :2345 ./TrymeLinux > gdbserver.log 2>&1 &"
+echo "gdbserver started on ${REMOTE_HOST}:2345"
+echo "To connect from WSL:"
+echo "  gdb ${BIN_PATH}"
+echo "  (gdb) target remote ${REMOTE_HOST}:2345"
 
 echo "Deployed to ${REMOTE_HOST}:${REMOTE_DIR}"
