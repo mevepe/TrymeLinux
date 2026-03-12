@@ -1,12 +1,8 @@
-﻿// TrymeLinux.cpp : Defines the entry point for the application.
-//
-
-#include "TrymeLinux.h"
-
-using namespace std;
+﻿#include "TrymeLinux.h"
 
 int main()
 {
-	cout << "Hello CMake." << endl;
+	std::cout << "Hello CMake.\n";
+
 	return 0;
 }
