@@ -44,3 +44,28 @@ Remote cross-build + deploy + debug example (Armbian at 192.168.0.100)
 Notes:
 - For maximum compatibility, create a sysroot from your Armbian device and put it under `cmake/sysroots/armbian-aarch64` and then use the `armbian-aarch64-sysroot.cmake` toolchain.
 - Visual Studio: configure a Remote Linux Debugger connection to 192.168.0.100 and point symbol/binary to the local cross-build output.
+
+
+launch.vs.json
+```json
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppgdb",
+      "name": "GDB Linux",
+      "project": "CMakeLists.txt",
+      "projectTarget": "TrymeLinux",
+      "comment": "Learn how to configure remote debugging. For more info, see http://aka.ms/vslinuxdebug",
+      "debuggerConfiguration": "gdb",
+      "MIMode": "gdb",
+      "remoteMachineName": "192.168.0.100",
+      "cwd": "/home/mevepe/app",
+      "preDebugCommand": "",
+      "args": [],
+      "env": {}
+    }
+  ]
+}
+```
