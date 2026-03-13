@@ -1,11 +1,11 @@
-﻿# CMakeList.txt : CMake project for TrymeLinux, include source and define
+# CMakeList.txt : CMake project for TrymeLinux, include source and define
 # project specific logic here.
 #
 
 # Add source to this project's executable.
 file(GLOB_RECURSE SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/sources/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/sources/*.h"
 )
 
 add_executable(TrymeLinux ${SOURCES})
