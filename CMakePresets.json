@@ -1,97 +1,72 @@
 ﻿{
-    "version": 3,
-    "configurePresets": [
-        {
-            "name": "windows-base",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Windows"
-            }
-        },
-        {
-            "name": "x64-debug",
-            "displayName": "x64 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "x64-release",
-            "displayName": "x64 Release",
-            "inherits": "x64-debug",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        },
-        {
-            "name": "linux",
-            "displayName": "Linux Debug",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "/usr/bin/gcc",
-                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
-                "CMAKE_BUILD_TYPE": "Debug"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "vendor": {
-              "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
-                "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
-                "remoteMachineName": "WSL",
-                "intelliSenseMode": "linux-gcc-x64",
-                "includePath": [
-                  "/usr/include",
-                  "/usr/local/include",
-                  "/home/me/armbian-rootfs/usr/include"
-                ]
-              }
-            }
-        },
-        {
-            "name": "arm64-wsl",
-            "displayName": "ARM64 Debug (cross WSL)",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/aarch64-linux-gnu.cmake",
-                "CMAKE_BUILD_TYPE": "Debug"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            }
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "linux",
+      "displayName": "Linux Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
+          "remoteMachineName": "WSL",
+          "intelliSenseMode": "linux-gcc-x64",
+          "includePath": [
+            "/usr/include",
+            "/usr/local/include",
+            "/home/me/armbian-rootfs/usr/include"
+          ]
         }
-    ]
-    ,
-    "buildPresets": [
-        {
-            "name": "linux",
-            "configurePreset": "linux"
-        },
-        {
-            "name": "arm64-wsl",
-            "configurePreset": "arm64-wsl"
+      }
+    },
+    {
+      "name": "arm64-wsl",
+      "displayName": "ARM64 Debug (cross WSL)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/aarch64-linux-gnu.cmake",
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}",
+          "remoteMachineName": "WSL",
+          "intelliSenseMode": "linux-gcc-x64",
+          "includePath": [
+            "/usr/include",
+            "/usr/local/include",
+            "/home/me/armbian-rootfs/usr/include"
+          ]
         }
-    ]
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux"
+    },
+    {
+      "name": "arm64-wsl",
+      "configurePreset": "arm64-wsl"
+    }
+  ]
 }
