@@ -2,21 +2,18 @@
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
-# Путь к rootfs Armbian (ОБЯЗАТЕЛЬНО укажи свой путь!)
-set(CMAKE_SYSROOT "/home/me/armbian-rootfs")
-
 # Кросс-компиляторы
 set(CMAKE_C_COMPILER   /usr/bin/aarch64-linux-gnu-gcc)
 set(CMAKE_CXX_COMPILER /usr/bin/aarch64-linux-gnu-g++)
 
 # Настройка sysroot для компилятора и линковщика
-set(CMAKE_C_FLAGS          "--sysroot=${CMAKE_SYSROOT}")
-set(CMAKE_CXX_FLAGS        "--sysroot=${CMAKE_SYSROOT}")
-set(CMAKE_EXE_LINKER_FLAGS "--sysroot=${CMAKE_SYSROOT}")
+set(CMAKE_C_FLAGS          "--sysroot=${ROOTFS}")
+set(CMAKE_CXX_FLAGS        "--sysroot=${ROOTFS}")
+set(CMAKE_EXE_LINKER_FLAGS "--sysroot=${ROOTFS}")
 
 # Пути поиска библиотек и заголовков — только внутри rootfs
 set(CMAKE_FIND_ROOT_PATH
-    ${CMAKE_SYSROOT}
+    ${ROOTFS}
 )
 
 # Программы ищем в системе WSL
