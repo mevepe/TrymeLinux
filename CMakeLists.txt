@@ -3,9 +3,9 @@
 #
 cmake_minimum_required (VERSION 3.10)
 
-project ("TrymeLinux")
-
 set(ROOTFS "/mnt/e/armbian-rootfs")
+
+project ("TrymeLinux")
 
 # Include sub-projects.
 add_subdirectory ("TrymeLinux")

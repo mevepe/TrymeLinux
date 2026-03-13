@@ -7,7 +7,6 @@ link_directories(${ROOTFS}/usr/lib/aarch64-linux-gnu)
 # Add source to this project's executable.
 add_executable (TrymeLinux "TrymeLinux.cpp")
 
-include_directories(${ROOTFS}/usr/include)
 target_include_directories(TrymeLinux PUBLIC ${ROOTFS}/usr/include)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
