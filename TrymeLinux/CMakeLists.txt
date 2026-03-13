@@ -3,7 +3,12 @@
 #
 
 # Add source to this project's executable.
-add_executable (TrymeLinux "TrymeLinux.cpp")
+file(GLOB_RECURSE SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+)
+
+add_executable(TrymeLinux ${SOURCES})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET TrymeLinux PROPERTY CXX_STANDARD 20)
@@ -12,7 +17,7 @@ endif()
 set_target_properties(TrymeLinux PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(TrymeLinux PRIVATE ${ROOTFS}/usr/include)
 target_link_directories(TrymeLinux PRIVATE ${ROOTFS}/usr/lib/aarch64-linux-gnu)
-target_link_libraries(TrymeLinux PRIVATE gpiodcxx gpiod)
+target_link_libraries(TrymeLinux PRIVATE gpiodcxx gpiod serial)
 
 # TODO: Add tests and install targets if needed.
 
