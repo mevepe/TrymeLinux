@@ -2,20 +2,17 @@
 # project specific logic here.
 #
 
-link_directories(${ROOTFS}/usr/lib/aarch64-linux-gnu)
-
 # Add source to this project's executable.
 add_executable (TrymeLinux "TrymeLinux.cpp")
-
-target_include_directories(TrymeLinux PUBLIC ${ROOTFS}/usr/include)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET TrymeLinux PROPERTY CXX_STANDARD 20)
 endif()
 
-# Ensure the linker is the C++ linker and link the C++ standard library explicitly
 set_target_properties(TrymeLinux PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(TrymeLinux PRIVATE stdc++ gpiod gpiodcxx)
+target_include_directories(TrymeLinux PRIVATE ${ROOTFS}/usr/include)
+target_link_directories(TrymeLinux PRIVATE ${ROOTFS}/usr/lib/aarch64-linux-gnu)
+target_link_libraries(TrymeLinux PRIVATE gpiodcxx gpiod)
 
 # TODO: Add tests and install targets if needed.
 

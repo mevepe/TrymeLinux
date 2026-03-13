@@ -3,7 +3,7 @@
 #
 cmake_minimum_required (VERSION 3.10)
 
-set(ROOTFS "/mnt/e/armbian-rootfs")
+set(ROOTFS "/home/me/armbian-rootfs")
 
 project ("TrymeLinux")
 
