@@ -22,24 +22,37 @@ namespace tests
 
 			auto gpio0_D1 = gpiochip0.get_line(25);
 			auto gpio0_D0 = gpiochip0.get_line(24);
-			auto gpio3_С7 = gpiochip3.get_line(23);
+			auto gpio3_C7 = gpiochip3.get_line(23);
 
 			gpio0_D1.request({ "gpio0-D1", gpiod::line_request::DIRECTION_OUTPUT, 0 }, 0);
-			gpio0_D0.request({ "gpio0-D0", gpiod::line_request::DIRECTION_OUTPUT, 0 }, 0);
-			gpio3_С7.request({ "gpio3-C7", gpiod::line_request::DIRECTION_OUTPUT, 0 }, 0);
+			gpio0_D0.request({ "gpio0-D0", gpiod::line_request::DIRECTION_INPUT, 0 }, 0);
+			gpio3_C7.request({ "gpio3-C7", gpiod::line_request::DIRECTION_OUTPUT, 0 }, 0);
 
 			auto target_delta_time = 1e-3;
 			auto start_time = std::chrono::high_resolution_clock::now();
 			auto previous_time = start_time;
-			auto value = 0;
+            auto value = 0;
+			auto previousValue = value;
+            auto coin = 0;
 
 			while (true)
 			{
-				gpio0_D1.set_value(value);
-				gpio0_D0.set_value(value);
-				gpio3_С7.set_value(value);
+                value = gpio0_D0.get_value();
 
-				while (true)
+                auto is_rising = value == 1 && previousValue == 0;
+                auto is_falling = value == 0 && previousValue == 1;
+
+                if (is_rising || is_falling)
+                {
+                    coin = coin == 0 ? 1 : 0;
+
+                    gpio0_D1.set_value(coin);
+                    gpio3_C7.set_value(coin);
+                }
+
+                previousValue = value;
+
+				/*while (true)
 				{
 					auto current_time = std::chrono::high_resolution_clock::now();
 					auto delta_time_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time - previous_time).count();
@@ -52,7 +65,7 @@ namespace tests
 
 						break;
 					}
-				}
+				}*/
 			}
 		}
 		catch (const std::exception& e)
