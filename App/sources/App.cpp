@@ -24,8 +24,7 @@ int main()
         return false;
     }
 
-    sched_param sch_params;
-    sch_params.sched_priority = priority;
+    sched_param sch_params = { priority };
 
     auto schedError = pthread_setschedparam(pthread_self(), SCHED_FIFO, &sch_params);
 
