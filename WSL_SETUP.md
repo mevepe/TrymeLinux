@@ -49,23 +49,25 @@ Notes:
 launch.vs.json
 ```json
 {
-  "version": "0.2.1",
-  "defaults": {},
-  "configurations": [
-    {
-      "type": "cppgdb",
-      "name": "GDB Linux",
-      "project": "CMakeLists.txt",
-      "projectTarget": "TrymeLinux",
-      "comment": "Learn how to configure remote debugging. For more info, see http://aka.ms/vslinuxdebug",
-      "debuggerConfiguration": "gdb",
-      "MIMode": "gdb",
-      "remoteMachineName": "192.168.0.100",
-      "cwd": "/home/mevepe/app",
-      "preDebugCommand": "",
-      "args": [],
-      "env": {}
-    }
-  ]
+    "version": "0.2.1",
+    "defaults": {},
+    "configurations": [
+        {
+            "type": "cppgdb",
+            "name": "GDB Linux",
+            "project": "CMakeLists.txt",
+            "projectTarget": "TrymeLinux",
+            "comment": "Learn how to configure remote debugging. For more info, see http://aka.ms/vslinuxdebug",
+            "debuggerConfiguration": "gdb",
+            "MIMode": "gdb",
+            //"remoteMachineName": "192.168.0.100",
+            "remoteMachineName": "192.168.0.101",
+            "deployDirectory": "/home/mevepe/app",
+            "cwd": "/home/mevepe/app",
+            "preDebugCommand": "",
+            "env": {},
+            "args": []
+        }
+    ]
 }
 ```
